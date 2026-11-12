@@ -1,0 +1,9 @@
+node_modules/
+local/
+.env*
+*.log
+coverage/
+dist/
+.vite/
+*.tsbuildinfo
+*.zip

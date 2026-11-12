@@ -1,0 +1,42 @@
+name: Instagram
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Preview reads Drive; publish creates an Instagram post
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - publish
+permissions:
+  contents: read
+concurrency:
+  group: instagram-publication
+  cancel-in-progress: false
+jobs:
+  run:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: [self-hosted, linux, centrificador]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Process Drive content
+        run: npm run action
+        env:
+          ACTION_MODE: ${{ inputs.mode }}
+          GOOGLE_ACCESS_TOKEN: ${{ secrets.GOOGLE_ACCESS_TOKEN }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          PUBLISH_API_KEY: ${{ secrets.PUBLISH_API_KEY }}
+          DRIVE_FOLDER_ID: ${{ vars.DRIVE_FOLDER_ID }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          META_API_VERSION: ${{ vars.META_API_VERSION }}
+          META_GRAPH_HOST: ${{ vars.META_GRAPH_HOST }}
+          PUBLIC_ORIGIN: ${{ vars.PUBLIC_ORIGIN }}
+          CENTRIFICADOR_STATE_DIR: ${{ vars.CENTRIFICADOR_STATE_DIR }}
+          PORT: ${{ vars.PORT }}

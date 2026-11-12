@@ -1,0 +1,4 @@
+/* Keep native browser controls for this functional increment. */
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);

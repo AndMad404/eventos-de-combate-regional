@@ -1,0 +1,33 @@
+{
+  "name": "centrificador",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "start": "node scripts/instagram/api.mjs",
+    "test": "node --test tests/data/instagram-api.test.mjs",
+    "action": "node scripts/instagram/run-action.mjs"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.12",
+    "@types/node": "^22.20.5",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "4.7.0",
+    "tailwindcss": "4.1.12",
+    "typescript": "^6.0.3",
+    "vite": "^6.4.5"
+  }
+}
